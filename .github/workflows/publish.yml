@@ -3,7 +3,7 @@ name: Publish wheels and conda packages
 on:
   push:
     tags:
-      - v*
+      - v**
 
 permissions:
   contents: read
