@@ -83,9 +83,3 @@ jobs:
         with:
           body: ${{ steps.build_changelog.outputs.changelog }}
           tag_name: ${{ needs.check_version.outputs.version }}
-
-      - name: Trigger release workflow
-        run: |
-          gh workflow run publish.yml
-        env:
-          GH_TOKEN: ${{ github.token }}
