@@ -78,18 +78,12 @@ jobs:
               ]
             }
 
-      - name: Push new Tag
-        run: |
-          echo "Creating a new tag: $VERSION"
-          git config --global user.email "support@terraquantum.swiss"
-          git config --global user.name "Terra Quantum"
-          git tag $VERSION
-          git push origin $VERSION
-        env:
-          VERSION: ${{ needs.check_version.outputs.version }}
-
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.build_changelog.outputs.changelog }}
           tag_name: ${{ needs.check_version.outputs.version }}
+
+      - name: Trigger release workflow
+        run: |
+          gh workflow run publish.yml
