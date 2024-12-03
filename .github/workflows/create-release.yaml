@@ -83,3 +83,8 @@ jobs:
         with:
           body: ${{ steps.build_changelog.outputs.changelog }}
           tag_name: ${{ needs.check_version.outputs.version }}
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: trigger-release
